@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body style="margin: 0px; color: #333;">
+  <?var theData = getEmailData();?>
+    <div
+      class="email-background"
+      style="background: #fff; padding: 10px; margin: 0px;"
+    >
+      <div class="pre-header" style="background: #fff; color: #fff;">
+        Your daily digest of Subway sales.
+      </div>
+      <div
+        class="email-container"
+        style="max-width: 900px; font-family: sans-serif; margin: 0 auto; overflow: hidden; border: 1px solid #eee; border-radius: 5px; padding: 10px;"
+      >
+        <h1 style="text-align: center;">Subway Daily Digest</h1>
+        <table
+          style="margin: 0px auto; font-size: 18px; border-collapse: collapse; width: 60%; vertical-align: middle;"
+          width="60%"
+          valign="middle"
+        >
+          <tr>
+            <th
+              colspan="2"
+              style="text-align: center; border: 1px solid black; column-span: 2; padding: 5px;"
+              align="center"
+            >
+              Subway Summary
+            </th>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Date:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              <?=theData.date?>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Sales:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              $<?=theData.proceeds?>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Productivity:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              <?=theData.productivity?>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Money Over/Short:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              $<?=theData.moneyOverShort?>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Bread Over/Short:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              <?=theData.subBreadOverShort?>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Flat Bread Over/Short:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              <?=theData.flatBreadOverShort?>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="border: 1px solid black; padding: 5px; width: 30%;"
+              width="30%"
+            >
+              Salad Over/Short:
+            </td>
+            <td style="border: 1px solid black; padding: 5px;">
+              <?=theData.saladOverShort?>
+            </td>
+          </tr>
+        </table>
+
+        <img src=<?=theData.salesOverTime?>
+        alt="" style="max-width: 100%;" /> <img src=<?=theData.productivityOverTime?>
+        alt="" style="max-width: 100%;" />
+      </div>
+    </div>
+  </body>
+</html>

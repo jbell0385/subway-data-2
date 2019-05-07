@@ -1,0 +1,57 @@
+body {
+  margin: 0px;
+  color: #333;
+}
+
+.email-background {
+  background: #fff;
+  padding: 10px;
+  margin: 0px;
+}
+
+.email-container {
+  max-width: 900px;
+  font-family: sans-serif;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.email-container table {
+  margin: 0px auto;
+  font-size: 18px;
+  border-collapse: collapse;
+  width: 60%;
+  vertical-align: middle;
+}
+
+.email-container table th {
+  text-align: center;
+  border: 1px solid black;
+  column-span: 2;
+  padding: 5px;
+}
+
+.email-container table td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.email-container table tr td:first-child {
+  width: 30%;
+}
+
+.email-container h1 {
+  text-align: center;
+}
+
+.pre-header {
+  background: #fff;
+  color: #fff;
+}
+
+img {
+  max-width: 100%;
+}
