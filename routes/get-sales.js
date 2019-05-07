@@ -204,31 +204,33 @@ router.get("/get-wisr", function(req, res, next) {
     await page.click("div.entity div.item");
     console.log("found store selector");
     await page.waitFor(1500);
+    var wisrUrl = await page.evaluate(() => {
+      var wisrUrl =
+        "https://liveiq.subway.com/Reporting/CombinedReports/WISR?id=QOEHUrk1o6w%3d&docName=WISR&reportType=mvc&weekEndDate=";
 
-    var wisrUrl =
-      "https://liveiq.subway.com/Reporting/CombinedReports/WISR?id=QOEHUrk1o6w%3d&docName=WISR&reportType=mvc&weekEndDate=";
+      var myDate = new Date();
+      while (myDate.getDay() !== 2) {
+        myDate.setDate(myDate.getDate() - 1);
+      }
 
-    var myDate = new Date();
-    while (myDate.getDay() !== 2) {
-      myDate.setDate(myDate.getDate() - 1);
-    }
+      var wisrDate = "";
+      var year = myDate.getFullYear();
+      if (myDate.getMonth() < 10) {
+        var month = "0" + (Number(myDate.getMonth()) + 1);
+      } else {
+        var month = myDate.getMonth() + 1;
+      }
+      if (myDate.getDate() < 10) {
+        var day = "0" + myDate.getDate();
+      } else {
+        var day = myDate.getDate();
+      }
 
-    var wisrDate = "";
-    var year = myDate.getFullYear();
-    if (myDate.getMonth() < 10) {
-      var month = "0" + (Number(myDate.getMonth()) + 1);
-    } else {
-      var month = myDate.getMonth() + 1;
-    }
-    if (myDate.getDate() < 10) {
-      var day = "0" + myDate.getDate();
-    } else {
-      var day = myDate.getDate();
-    }
+      wisrDate = year + "-" + month + "-" + day;
 
-    wisrDate = year + "-" + month + "-" + day;
-
-    wisrUrl = wisrUrl + wisrDate;
+      wisrUrl = wisrUrl + wisrDate;
+      return wisrUrl;
+    });
 
     await page.goto(wisrUrl);
     await page.waitFor("#ui-datepicker-div");
