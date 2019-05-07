@@ -171,6 +171,7 @@ router.get("/get-cash-report", function(req, res, next) {
 router.get("/get-wisr", function(req, res, next) {
   (async () => {
     const browser = await puppeteer.launch({
+      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
@@ -205,12 +206,13 @@ router.get("/get-wisr", function(req, res, next) {
     console.log("found store selector");
     await page.waitFor(1500);
     var wisrUrl = await page.evaluate(() => {
-      var wisrUrl =
+      var wisrUrlTemp =
         "https://liveiq.subway.com/Reporting/CombinedReports/WISR?id=QOEHUrk1o6w%3d&docName=WISR&reportType=mvc&weekEndDate=";
 
       var myDate = new Date();
       while (myDate.getDay() !== 2) {
         myDate.setDate(myDate.getDate() - 1);
+        console.log(myDate);
       }
 
       var wisrDate = "";
@@ -228,15 +230,17 @@ router.get("/get-wisr", function(req, res, next) {
 
       wisrDate = year + "-" + month + "-" + day;
 
-      wisrUrl = wisrUrl + wisrDate;
-      return wisrUrl;
+      wisrUrlTemp = wisrUrlTemp + wisrDate;
+      return wisrUrlTemp;
     });
     console.log(wisrUrl);
     await page.waitFor(1500);
     await page.goto(wisrUrl);
     console.log("made it to page");
     await page.waitFor(1500);
-    await page.waitFor("table.inner");
+    await page.waitFor("table.innerTable", {
+      visible: true
+    });
     console.log("found tables");
     const wisrData = await page.evaluate(() => {
       console.log("inside evaluate");
