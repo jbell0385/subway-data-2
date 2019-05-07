@@ -234,9 +234,12 @@ router.get("/get-wisr", function(req, res, next) {
     console.log(wisrUrl);
     await page.waitFor(1500);
     await page.goto(wisrUrl);
+    console.log("made it to page");
     await page.waitFor(1500);
     await page.waitFor("#ui-datepicker-div");
+    console.log("found picker");
     const wisrData = await page.evaluate(() => {
+      console.log("inside evaluate");
       const tables = Array.from(document.querySelectorAll("table.innerTable"));
       const finalArr = [];
       tables.forEach(table => {
