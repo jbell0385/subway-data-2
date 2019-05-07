@@ -171,7 +171,6 @@ router.get("/get-cash-report", function(req, res, next) {
 router.get("/get-wisr", function(req, res, next) {
   (async () => {
     const browser = await puppeteer.launch({
-      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
