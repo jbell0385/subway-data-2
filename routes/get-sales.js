@@ -125,13 +125,13 @@ router.get("/get-cash-report", function(req, res, next) {
     await page.waitForFunction(
       'document.querySelector("#navbar-entity-wrapper").classList.contains("show")'
     );
-    await page.waitFor(1500);
-    await page.waitForSelector("#btn-datepicker-decrement", {
-      visible: true
-    });
-    console.log("found date picker");
-    await page.click("#btn-datepicker-decrement");
-    console.log("clicked date picker");
+    // await page.waitFor(1500);
+    // await page.waitForSelector("#btn-datepicker-decrement", {
+    //   visible: true
+    // });
+    // console.log("found date picker");
+    // await page.click("#btn-datepicker-decrement");
+    // console.log("clicked date picker");
     await page.waitFor(1500);
     await page.waitForSelector("tr.bottom", {
       visible: true
