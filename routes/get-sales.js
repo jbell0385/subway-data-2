@@ -71,7 +71,7 @@ router.get("/get-sales", function(req, res, next) {
 router.get("/get-cash-report", function(req, res, next) {
   (async () => {
     const browser = await puppeteer.launch({
-      // headless: false,
+      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
@@ -106,25 +106,25 @@ router.get("/get-cash-report", function(req, res, next) {
     console.log("found available stores");
     await page.click("#available-stores div.store-item label");
     console.log("clicked available stores");
-    await page.waitForSelector("#report", {
-      visible: true
-    });
-    await page.waitForSelector(
-      ".entity-arrow.group-store-date a i.fa.fa-chevron-down",
-      {
-        visible: true,
-        timeout: 10000
-      }
-    );
-    console.log("found down arrow");
-    await page.click(".entity-arrow.group-store-date a i.fa.fa-chevron-down");
-    console.log("clicked down arrow");
-    await page.waitForSelector("#navbar-entity-wrapper", {
-      visible: true
-    });
-    await page.waitForFunction(
-      'document.querySelector("#navbar-entity-wrapper").classList.contains("show")'
-    );
+    // await page.waitForSelector("#report", {
+    //   visible: true
+    // });
+    // await page.waitForSelector(
+    //   ".entity-arrow.group-store-date a i.fa.fa-chevron-down",
+    //   {
+    //     visible: true,
+    //     timeout: 10000
+    //   }
+    // );
+    // console.log("found down arrow");
+    // await page.click(".entity-arrow.group-store-date a i.fa.fa-chevron-down");
+    // console.log("clicked down arrow");
+    // await page.waitForSelector("#navbar-entity-wrapper", {
+    //   visible: true
+    // });
+    // await page.waitForFunction(
+    //   'document.querySelector("#navbar-entity-wrapper").classList.contains("show")'
+    // );
     // await page.waitFor(1500);
     // await page.waitForSelector("#btn-datepicker-decrement", {
     //   visible: true
