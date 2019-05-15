@@ -6,6 +6,7 @@ const puppeteer = require("puppeteer");
 router.get("/get-sales", function(req, res, next) {
   (async () => {
     const browser = await puppeteer.launch({
+      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
@@ -15,37 +16,32 @@ router.get("/get-sales", function(req, res, next) {
     await page.type("#signInName", process.env.SUBWAY_USER);
     await page.type("#password", process.env.SUBWAY_PASS);
     await page.click("#next");
-
-    await page.waitForSelector(
-      ".entity-arrow.group-store-date a i.fa.fa-chevron-down",
-      {
-        visible: true,
-        timeout: 10000
-      }
-    );
-    await page.waitForSelector("table.px-table.store-readings", {
+    console.log("made it to page");
+    await page.waitForSelector("#entityselectorInput", {
+      visible: true,
+      timeout: 10000
+    });
+    await page.waitForSelector("table.px-table.store-indexes", {
       visible: true
     });
-    await page.click(".entity-arrow.group-store-date a i.fa.fa-chevron-down");
-    await page.waitForSelector("#navbar-entity-wrapper");
-    await page.evaluate(() => {
-      document.querySelector("#navbar-entity-wrapper").style.visibility =
-        "visible";
+    console.log("found selector");
+    await page.click("#entityselectorInput");
+    console.log("clicked selector");
+    await page.waitFor(1500);
+    await page.waitForSelector("div.item", {
+      visible: true
     });
-    await page.waitForSelector("#entityselectorButton");
-    await page.click("#entityselectorButton");
-    await page.waitForSelector(
-      "[id='hTvox4LiGfw%3D_store_18426_12%2F1%2F2014%2012%3A00%3A00%20AM']"
-    );
-    await page.click(
-      "[id='hTvox4LiGfw%3D_store_18426_12%2F1%2F2014%2012%3A00%3A00%20AM']"
-    );
+    console.log("found store name");
+    await page.click("div.item");
+    console.log("clicked store name");
+    await page.waitFor(1500);
     await page.waitForSelector("table.px-table.store-readings", {
       visible: true
     });
     await page.waitForSelector(".bottom.all-stores", {
       visible: true
     });
+    console.log("table loaded");
 
     //   await page.waitFor(2000);
     const storeReadings = await page.evaluate(() => {
@@ -71,7 +67,6 @@ router.get("/get-sales", function(req, res, next) {
 router.get("/get-cash-report", function(req, res, next) {
   (async () => {
     const browser = await puppeteer.launch({
-      // headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
@@ -82,12 +77,14 @@ router.get("/get-cash-report", function(req, res, next) {
     await page.type("#password", process.env.SUBWAY_PASS);
     await page.click("#next");
     console.log("made it to page");
-    await page.waitForSelector("#menu-item-tab-reprep", {
-      visible: true
-    });
+    await page.waitFor(1500);
     await page.waitForSelector("tr.alt.bottom", {
       visible: true
     });
+    await page.waitForSelector("#menu-item-tab-reprep", {
+      visible: true
+    });
+
     await page.click("#menu-item-tab-reprep");
     console.log("clicked reports button");
     await page.waitForFunction(
