@@ -6,7 +6,6 @@ const puppeteer = require("puppeteer");
 router.get("/get-sales", function(req, res, next) {
   (async () => {
     const browser = await puppeteer.launch({
-      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
     const page = await browser.newPage();
