@@ -80,6 +80,7 @@ router.get("/get-cash-report", function(req, res, next) {
     await page.waitForSelector("tr.alt.bottom", {
       visible: true
     });
+    await page.waitFor(1500);
     await page.waitForSelector("#menu-item-tab-reprep", {
       visible: true
     });
