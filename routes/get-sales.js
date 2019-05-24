@@ -16,6 +16,7 @@ router.get("/get-sales", function(req, res, next) {
     await page.type("#password", process.env.SUBWAY_PASS);
     await page.click("#next");
     console.log("made it to page");
+    await page.waitFor(2000);
     await page.waitForSelector("#entityselectorInput", {
       visible: true,
       timeout: 10000
@@ -26,14 +27,14 @@ router.get("/get-sales", function(req, res, next) {
     console.log("found selector");
     await page.click("#entityselectorInput");
     console.log("clicked selector");
-    await page.waitFor(1500);
+    await page.waitFor(1800);
     await page.waitForSelector("div.item", {
       visible: true
     });
     console.log("found store name");
     await page.click("div.item");
     console.log("clicked store name");
-    await page.waitFor(1500);
+    await page.waitFor(1800);
     await page.waitForSelector("table.px-table.store-readings", {
       visible: true
     });
@@ -77,11 +78,11 @@ router.get("/get-cash-report", function(req, res, next) {
     await page.click("#next");
     console.log("made it to page");
     await page.waitFor(1500);
-    await page.waitForSelector("tr.alt.bottom", {
-      visible: true,
-      timeout: 10000
-    });
-    console.log("found tr bottom");
+    // await page.waitForSelector("tr.alt.bottom", {
+    //   visible: true,
+    //   timeout: 10000
+    // });
+    console.log("redirecting");
     await page.goto("https://liveiq.subway.com/Reporting/CashInReconciliation");
     // await page.waitFor(2000);
     // await page.waitForSelector("#menu-item-tab-reprep", {
@@ -102,7 +103,7 @@ router.get("/get-cash-report", function(req, res, next) {
     // console.log("found cash in report button");
     // await page.click("#sub-item-cashin a");
     // console.log("clicked cash in report button");
-    await page.waitFor(1500);
+    await page.waitFor(2000);
     console.log("made it to cash in report page");
     await page.waitForSelector("#available-stores div.store-item label", {
       visible: true,
@@ -137,16 +138,16 @@ router.get("/get-cash-report", function(req, res, next) {
     // console.log("found date picker");
     // await page.click("#btn-datepicker-decrement");
     // console.log("clicked date picker");
-    await page.waitFor(1500);
+    await page.waitFor(1800);
 
     await page.waitForSelector("tr.bottom", {
       visible: true
     });
-    await page.waitFor(1500);
+    await page.waitFor(1800);
     console.log("found last cash in");
     await page.click("tr.bottom td div a");
     console.log("clicked last cash in");
-    await page.waitFor(1500);
+    await page.waitFor(1800);
     await page.waitForSelector(".jspPane p", {
       visible: true
     });
