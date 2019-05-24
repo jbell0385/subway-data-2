@@ -78,12 +78,14 @@ router.get("/get-cash-report", function(req, res, next) {
     console.log("made it to page");
     await page.waitFor(1500);
     await page.waitForSelector("tr.alt.bottom", {
-      visible: true
+      visible: true,
+      timeout: 10000
     });
     console.log("found tr bottom");
-    await page.waitFor(1500);
+    await page.waitFor(2000);
     await page.waitForSelector("#menu-item-tab-reprep", {
-      visible: true
+      visible: true,
+      timeout: 10000
     });
     console.log("found menu item");
     await page.click("#menu-item-tab-reprep");
@@ -92,14 +94,16 @@ router.get("/get-cash-report", function(req, res, next) {
       'document.querySelector("#menu-item-tab-reprep").classList.contains("open")'
     );
     await page.waitForSelector("#sub-item-cashin a", {
-      visible: true
+      visible: true,
+      timeout: 10000
     });
     await page.waitFor(1500);
     console.log("found cash in report button");
     await page.click("#sub-item-cashin a");
     console.log("clicked cash in report button");
     await page.waitForSelector("#available-stores div.store-item label", {
-      visible: true
+      visible: true,
+      timeout: 10000
     });
     console.log("found available stores");
     await page.click("#available-stores div.store-item label");
