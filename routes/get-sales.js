@@ -80,11 +80,12 @@ router.get("/get-cash-report", function(req, res, next) {
     await page.waitForSelector("tr.alt.bottom", {
       visible: true
     });
+    console.log("found tr bottom");
     await page.waitFor(1500);
     await page.waitForSelector("#menu-item-tab-reprep", {
       visible: true
     });
-
+    console.log("found menu item");
     await page.click("#menu-item-tab-reprep");
     console.log("clicked reports button");
     await page.waitForFunction(
