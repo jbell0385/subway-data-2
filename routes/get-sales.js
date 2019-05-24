@@ -82,25 +82,28 @@ router.get("/get-cash-report", function(req, res, next) {
       timeout: 10000
     });
     console.log("found tr bottom");
-    await page.waitFor(2000);
-    await page.waitForSelector("#menu-item-tab-reprep", {
-      visible: true,
-      timeout: 10000
-    });
-    console.log("found menu item");
-    await page.click("#menu-item-tab-reprep");
-    console.log("clicked reports button");
-    await page.waitForFunction(
-      'document.querySelector("#menu-item-tab-reprep").classList.contains("open")'
-    );
-    await page.waitForSelector("#sub-item-cashin a", {
-      visible: true,
-      timeout: 10000
-    });
+    await page.goto("https://liveiq.subway.com/Reporting/CashInReconciliation");
+    // await page.waitFor(2000);
+    // await page.waitForSelector("#menu-item-tab-reprep", {
+    //   visible: true,
+    //   timeout: 10000
+    // });
+    // console.log("found menu item");
+    // await page.click("#menu-item-tab-reprep");
+    // console.log("clicked reports button");
+    // await page.waitForFunction(
+    //   'document.querySelector("#menu-item-tab-reprep").classList.contains("open")'
+    // );
+    // await page.waitForSelector("#sub-item-cashin a", {
+    //   visible: true,
+    //   timeout: 10000
+    // });
+    // await page.waitFor(1500);
+    // console.log("found cash in report button");
+    // await page.click("#sub-item-cashin a");
+    // console.log("clicked cash in report button");
     await page.waitFor(1500);
-    console.log("found cash in report button");
-    await page.click("#sub-item-cashin a");
-    console.log("clicked cash in report button");
+    console.log("made it to cash in report page");
     await page.waitForSelector("#available-stores div.store-item label", {
       visible: true,
       timeout: 10000
