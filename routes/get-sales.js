@@ -16,7 +16,11 @@ router.get("/get-sales", function(req, res, next) {
     await page.type("#password", process.env.SUBWAY_PASS);
     await page.click("#next");
     console.log("made it to page");
-    await page.waitFor(2000);
+    await page.waitFor(2100);
+    await page.waitForSelector("#storeReadingsHost", {
+      visible: true,
+      timeout: 10000
+    });
     await page.waitForSelector("#entityselectorInput", {
       visible: true,
       timeout: 10000
